@@ -1,5 +1,5 @@
-import requests, PythonPlus, random
-from PythonPlus import Colors
+import requests, random
+from colorama import Fore, init
 from threading import Thread
 from time import strftime, gmtime
 
@@ -8,11 +8,11 @@ def Main():
     rand_key = ''.join(random.choice(legit_key) for i in range(32))
     r = requests.get(f'http://2captcha.com/res.php?action=getbalance&key={rand_key}')
     if "ERROR_WRONG_USER_KEY" in r.text:
-        print(f'{Colors.Red}[{Colors.Reset}{strftime("%H:%M:%S", gmtime())}{Colors.Red}]{Colors.Reset} Invalid: {Colors.Red}{rand_key} {Colors.Reset}')
+        print(f'{Fore.RED}[{Fore.RESET}{strftime("%H:%M:%S", gmtime())}{Fore.RED}]{Fore.RESET} Invalid: {For.RED}{rand_key} {Fore.RESET}')
     if "IP_BANNED" in r.text:
-        print(f'{Colors.Red}[{Colors.Reset}{strftime("%H:%M:%S", gmtime())}{Colors.Red}]{Colors.Reset} Rate Limited')
+        print(f'{Fore.RED}[{Fore.RESET}{strftime("%H:%M:%S", gmtime())}{Fore.RED}]{Fore.RESET} Rate Limited')
     if "." in r.text:
-        print(f'{Colors.Green}[{Colors.Reset}{strftime("%H:%M:%S", gmtime())}{Colors.Green}]{Colors.Reset} Valid: {Colors.Green}{rand_key} {Colors.Reset}| Balance: {Colors.Green}${r.text} {Colors.Reset}')
+        print(f'{Fore.GREEN}[{Fore.RESET}{strftime("%H:%M:%S", gmtime())}{Fore.GREEN}]{Fore.RESET} Valid: {Fore.GREEN}{rand_key} {Fore.RESET}| Balance: {Fore.GREEN}${r.text} {Fore.RESET}')
 
 if __name__ == '__main__':
     while True:
